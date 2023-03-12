@@ -1,5 +1,6 @@
 #include<iostream>
-
+#include<windows.h>
+#include<stdlib.h>
 using namespace std;
 
 const int n = 1000;
@@ -21,6 +22,12 @@ void recursion(int n, int* a)
 }
 int main()
 {
+
+	long long head, tail, freq; // timers
+	// similar to CLOCKS_PER_SEC
+	QueryPerformanceFrequency((LARGE_INTEGER*) & freq);
+	// start time
+	QueryPerformanceCounter((LARGE_INTEGER*) & head);
 	int a[n];
 	int sum = 0;
 
@@ -49,6 +56,8 @@ int main()
 		for (int i = 0; i < m / 2; i++)
 			a[i] = a[i * 2] + a[i * 2 + 1]; // 相邻元素相加连续存储到数组最前面，a[0]为最终结果
 
-
+	// end time
+	QueryPerformanceCounter((LARGE_INTEGER *)&tail);
+	cout << "col" << (tail-head)* 1000.0 / freq<< "ms" << endl;
 
 }
